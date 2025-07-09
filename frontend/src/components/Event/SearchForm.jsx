@@ -18,7 +18,7 @@ const convertBinaryToBase64 = (binaryData, contentType) => {
 };
 
 // Define the base URL for API requests
-const Api_url = "http://localhost";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 // Styled components using MUI's `styled` function
 const SearchWrapper = styled("div")(({ theme }) => ({
@@ -61,7 +61,7 @@ const SearchForm = ({ setListOfEvents }) => {
     try {
       // Make a GET request to search events
       const response = await axios.get(
-        `${Api_url}:3001/api/event/searchEvents?title=${searchString}`
+        `${apiUrl}/api/event/searchEvents?title=${searchString}`
       );
 
       let events = response.data;
