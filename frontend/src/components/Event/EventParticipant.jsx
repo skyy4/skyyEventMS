@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const EventParticipant = () => {
   const [eventId, setEventId] = useState("");
@@ -42,10 +43,10 @@ export const EventParticipant = () => {
     const fetchParticipants = async () => {
       if (!eventId) return;
       try {
-        const eventResponse = await axios.get(
-          `http://localhost:3001/api/event/getEvent/${eventId}`
+        const response = await axios.get(
+          `${apiUrl}/api/event/getEvent/${eventId}`
         );
-        const participantIds = eventResponse.data.participants;
+        const participantIds = response.data.participants;
         console.log(participantIds);
 
         // Fetch participant data for each participant ID
@@ -53,7 +54,7 @@ export const EventParticipant = () => {
           participantIds.map(async (partId) => {
             try {
               const userResponse = await axios.get(
-                `http://localhost:3001/api/getUserById/${partId}`
+                `${apiUrl}/api/getUserById/${partId}`
               );
               let userData = userResponse.data;
 

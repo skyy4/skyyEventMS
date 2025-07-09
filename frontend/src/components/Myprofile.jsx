@@ -18,6 +18,8 @@ import { jwtDecode } from "jwt-decode";
 import FormDialog from "./DeleteDialog";
 import ImageUpload from "./Addphoto";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 function Myprofile() {
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +51,7 @@ function Myprofile() {
       const fetchUser = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/api/getUserById/${userId}`
+            `${apiUrl}/api/getUserById/${userId}`
           );
           let userData = response.data;
           setUser(userData);
@@ -83,7 +85,7 @@ function Myprofile() {
       try {
         // Save updated data to the database
         await axios.put(
-          `http://localhost:3001/api/updateUser/${userId}`,
+          `${apiUrl}/api/updateUser/${userId}`,
           editedValues,
           {
             headers: {

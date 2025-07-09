@@ -51,7 +51,7 @@ export default function FavoriteEvent() {
     if (userId) {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/api/getUserById/${userId}`);
+                const response = await axios.get(`${apiUrl}/api/getUserById/${userId}`);
                 let userData = response.data;
                 setUser(userData);    
             } catch (error) {
@@ -76,7 +76,7 @@ useEffect(() => {
         const fetchedEvents = await Promise.all(
           user.registered_events.map(async (id) => {
             // Make a separate GET request for each ID
-            const response = await axios.get(`http://localhost:3001/api/event/getEvent/${id}`);
+            const response = await axios.get(`${apiUrl}/api/event/getEvent/${id}`);
             let eventData = response.data;
             
             // Convert binary data to base64 if there is a cover image

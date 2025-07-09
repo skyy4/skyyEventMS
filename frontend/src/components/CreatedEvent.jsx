@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 // Function to convert binary data to base64
 const convertBinaryToBase64 = (binaryData, contentType) => {
   if (binaryData && binaryData instanceof Uint8Array) {
@@ -51,7 +53,7 @@ export default function CreatedEvent() {
     if (userId) {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/api/getUserById/${userId}`);
+                const response = await axios.get(`${apiUrl}/api/getUserById/${userId}`);
                 let userData = response.data;
                 setUser(userData);    
             } catch (error) {
@@ -76,7 +78,7 @@ useEffect(() => {
         const fetchedEvents = await Promise.all(
           user.created_event.map(async (id) => {
             // Make a separate GET request for each ID
-            const response = await axios.get(`http://localhost:3001/api/event/getEvent/${id}`);
+            const response = await axios.get(`${apiUrl}/api/event/getEvent/${id}`);
             let eventData = response.data;
             
             // Convert binary data to base64 if there is a cover image

@@ -51,7 +51,7 @@ function EventGrids({ listOfEvent, setListOfEvent, category }) {
       setUserId(jwtToken._id);
       setUserRole(jwtToken.role);
       axios
-        .get(`http://localhost:3001/api/user/${jwtToken._id}`)
+        .get(`${apiUrl}/api/user/${jwtToken._id}`)
         .then((res) => {
           setFavorites(res.data.favourite_events || []);
         })
@@ -67,7 +67,7 @@ function EventGrids({ listOfEvent, setListOfEvent, category }) {
       try {
         // if (category) {
         const response = await axios.get(
-          `http://localhost:3001/api/event/getCategory/?category=${category}`
+          `${apiUrl}/api/event/getCategory/?category=${category}`
         );
         setResponseData(response.data);
         // } else {
@@ -125,7 +125,7 @@ function EventGrids({ listOfEvent, setListOfEvent, category }) {
     console.log(event_id);
 
     axios
-      .put(`http://localhost:3001/api/user/edit/${userId}`, {
+      .put(`${apiUrl}/api/user/edit/${userId}`, {
         registered_events: [...registeredList, event_id],
       })
       .then(() => {
@@ -147,7 +147,7 @@ function EventGrids({ listOfEvent, setListOfEvent, category }) {
       : [...favorites, event_id];
 
     axios
-      .put(`http://localhost:3001/api/user/edit/${userId}`, {
+      .put(`${apiUrl}/api/user/edit/${userId}`, {
         favourite_events: updatedFavorites,
       })
       .then(() => {

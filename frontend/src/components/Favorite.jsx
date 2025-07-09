@@ -7,6 +7,8 @@ import { Button, Typography } from '@mui/material';
 import MediaCard from './Card'
 import Divider from '@mui/material/Divider';
 import Accountname from './Accountname'
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 
 export default function Favorite() {

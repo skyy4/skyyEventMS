@@ -19,6 +19,8 @@ import Rating from "@mui/material/Rating";
 import { jwtDecode } from "jwt-decode";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const Reviews = () => {
   const [eventId, setEventId] = useState("");
   const [eventTitle, setEventTitle] = useState("");
@@ -51,7 +53,7 @@ export const Reviews = () => {
     }
     if (user && user.token) {
       axios
-        .get(`http://localhost:3001/api/review/getReview/${eventId}`, {
+        .get(`${apiUrl}/api/review/getReview/${eventId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -71,7 +73,7 @@ export const Reviews = () => {
 
     if (user && user.token) {
       axios
-        .get(`http://localhost:3001/api/user/${user_id}`, {
+        .get(`${apiUrl}/api/user/${user_id}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -93,7 +95,7 @@ export const Reviews = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token) {
       axios
-        .get(`http://localhost:3001/api/review/getReview/${eventId}`, {
+        .get(`${apiUrl}/api/review/getReview/${eventId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -111,7 +113,7 @@ export const Reviews = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token && eventId) {
       axios
-        .get(`http://localhost:3001/api/event/getEvent/${eventId}`, {
+        .get(`${apiUrl}/api/event/getEvent/${eventId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -145,7 +147,7 @@ export const Reviews = () => {
     if (user && user.token) {
       try {
         const respons = await axios.post(
-          "http://localhost:3001/api/review/addReview",
+          `${apiUrl}/api/review/addReview`,
           rev,
           {
             headers: {
@@ -189,7 +191,7 @@ export const Reviews = () => {
     if (user && user.token) {
       try {
         await axios.put(
-          `http://localhost:3001/api/review/updateReview/${reviewId}`,
+          `${apiUrl}/api/review/updateReview/${reviewId}`,
           {
             review: editReviewText,
             rating: editReviewRating,
@@ -224,7 +226,7 @@ export const Reviews = () => {
     if (user && user.token) {
       try {
         await axios.delete(
-          `http://localhost:3001/api/review/deleteReview/${selectedReview._id}`,
+          `${apiUrl}/api/review/deleteReview/${selectedReview._id}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,

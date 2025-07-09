@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography, Alert } from "@mui/material";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -42,7 +43,7 @@ const ContactForm = () => {
       try {
         // Sending form data to backend
         const response = await axios.post(
-          "http://localhost:3001/api/contact/addContact",
+          `${apiUrl}/api/contact/addContact`,
           formData
         );
 

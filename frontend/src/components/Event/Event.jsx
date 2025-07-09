@@ -27,6 +27,8 @@ import SearchForm from "./SearchForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 // Function to convert binary data to base64
 const convertBinaryToBase64 = (binaryData, contentType) => {
   if (binaryData && binaryData instanceof Uint8Array) {
@@ -72,7 +74,7 @@ export const Event = () => {
       setUserId(token._id);
       setUserRole(token.role);
       axios
-        .get(`http://localhost:3001/api/user/${token._id}`, {
+        .get(`${apiUrl}/api/user/${token._id}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -111,8 +113,8 @@ export const Event = () => {
       try {
         const response = await axios.get(
           category
-            ? `http://localhost:3001/api/event/getCategory/?category=${category}`
-            : "http://localhost:3001/api/event/getEvent"
+            ? `${apiUrl}/api/event/getCategory/?category=${category}`
+            : `${apiUrl}/api/event/getEvent`
         );
 
         let res_data = response.data;
@@ -153,7 +155,7 @@ export const Event = () => {
       try {
         // Only make the API call if category is not empty
         if (!category || category.trim() === "") {
-          const response = await axios.get("http://localhost:3001/api/event/getEvent");
+          const response = await axios.get(`${apiUrl}/api/event/getEvent`);
           let res_data = response.data;
           console.log("res_data (all events)");
           console.log(res_data);
@@ -174,7 +176,7 @@ export const Event = () => {
           setError("");
         } else {
           const response = await axios.get(
-            `http://localhost:3001/api/event/getCategory/?category=${category}`
+            `${apiUrl}/api/event/getCategory/?category=${category}`
           );
 
           let res_data = response.data;
@@ -244,7 +246,7 @@ export const Event = () => {
     if (user && user.token) {
       await axios
         .put(
-          `http://localhost:3001/api/user/edit/${userId}`,
+          `${apiUrl}/api/user/edit/${userId}`,
           {
             favourite_events: updatedFavorites,
           },
@@ -281,7 +283,7 @@ export const Event = () => {
       try {
         // Fetch the latest participants for the event
         const eventResponse = await axios.get(
-          `http://localhost:3001/api/event/getEvent/${event_id}`
+          `${apiUrl}/api/event/getEvent/${event_id}`
         );
         const currentParticipants = eventResponse.data.participants;
 
@@ -296,7 +298,7 @@ export const Event = () => {
 
         // First, update the user's registered events
         await axios.put(
-          `http://localhost:3001/api/user/edit/${userId}`,
+          `${apiUrl}/api/user/edit/${userId}`,
           {
             registered_events: updatedRegister,
           },
@@ -309,7 +311,7 @@ export const Event = () => {
 
         // Then, update the event's participants
         await axios.put(
-          `http://localhost:3001/api/event/edit/${event_id}`,
+          `${apiUrl}/api/event/edit/${event_id}`,
           {
             participants: updatedParticipants,
           },

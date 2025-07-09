@@ -8,6 +8,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
 import { Typography } from "@mui/material";
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const AddUser = () => {
   const [open, setOpen] = React.useState(false);

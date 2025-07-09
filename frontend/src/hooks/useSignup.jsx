@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
@@ -13,7 +14,7 @@ export const useSignup = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3001/api/user/signup",
+        `${apiUrl}/api/user/signup`,
         userData
       );
       console.log("Rs: ", res.data);

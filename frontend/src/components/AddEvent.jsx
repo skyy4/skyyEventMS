@@ -167,7 +167,7 @@ export const AddEvent = () => {
     if (user && user.token) {
       try {
         const result = await axios.post(
-          "http://localhost:3001/api/event/createEvent",
+          `${apiUrl}/api/event/createEvent`,
           formDataToSend,
           {
             headers: {

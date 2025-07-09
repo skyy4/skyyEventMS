@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
@@ -14,7 +15,7 @@ export const useLogin = () => {
     setError(null);
 
     try {
-      const res = await axios.post("http://localhost:3001/api/user/login", {
+      const res = await axios.post(`${apiUrl}/api/user/login`, {
         email,
         password,
       });

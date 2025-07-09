@@ -7,6 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
@@ -62,7 +63,7 @@ export default function FormDialogDelete({ size = "medium" }) {
         const user = JSON.parse(localStorage.getItem("user"));
         // Attempt to delete the event
         await axios.delete(
-          `http://localhost:3001/api/event/delete/${eventId}`,
+          `${apiUrl}/api/event/deleteEvent/${eventId}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,

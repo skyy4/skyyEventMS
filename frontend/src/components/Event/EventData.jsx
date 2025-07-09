@@ -86,6 +86,7 @@ export default function EventData() {
   const navigate = useNavigate();
   const location = useLocation();
   const category = location.state?.category;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (event && event.created_by) {
@@ -100,7 +101,7 @@ export default function EventData() {
       setUserId(token._id);
       setUserRole(token.role);
       axios
-        .get(`http://localhost:3001/api/user/${token._id}`, {
+        .get(`${apiUrl}/api/user/${token._id}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -142,7 +143,7 @@ export default function EventData() {
     if (user && user.token) {
       await axios
         .put(
-          `http://localhost:3001/api/user/edit/${userId}`,
+          `${apiUrl}/api/user/edit/${userId}`,
           { favourite_events: updatedFavorites },
           { headers: { Authorization: `Bearer ${user.token}` } }
         )
@@ -166,7 +167,7 @@ export default function EventData() {
     if (user && user.token) {
       try {
         const eventResponse = await axios.get(
-          `http://localhost:3001/api/event/getEvent/${event_id}`
+          `${apiUrl}/api/event/getEvent/${event_id}`
         );
         const currentParticipants = eventResponse.data.participants;
         const isReg = register.includes(event_id);
@@ -177,12 +178,12 @@ export default function EventData() {
           ? currentParticipants.filter((id) => id !== userId)
           : [...currentParticipants, userId];
         await axios.put(
-          `http://localhost:3001/api/user/edit/${userId}`,
+          `${apiUrl}/api/user/edit/${userId}`,
           { registered_events: updatedRegister },
           { headers: { Authorization: `Bearer ${user.token}` } }
         );
         await axios.put(
-          `http://localhost:3001/api/event/edit/${event_id}`,
+          `${apiUrl}/api/event/edit/${event_id}`,
           { participants: updatedParticipants },
           { headers: { Authorization: `Bearer ${user.token}` } }
         );
@@ -204,7 +205,7 @@ export default function EventData() {
     const fetchEvent = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/event/getEvent/${eventId}`
+          `${apiUrl}/api/event/getEvent/${eventId}`
         );
         let eventData = response.data;
         if (eventData.cover_image) {
