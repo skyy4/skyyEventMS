@@ -20,8 +20,29 @@ require("dotenv").config();
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://127.0.0.1:3000"
+];
+
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
+
+app.options('*', cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 app.use(express.json()); // To parse JSON bodies
 app.use(bodyParser.json());
 // Connect to MongoDB
@@ -43,6 +64,8 @@ app.use(errorHadler);
 
 // Start server
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, "127.0.0.1", () => {
-  console.log(`Server running perfectly! Running on port ${PORT}`);
+const HOST = '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
 });
