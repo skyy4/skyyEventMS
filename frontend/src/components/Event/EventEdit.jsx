@@ -114,6 +114,7 @@ export const EventEdit = () => {
 
   // Handle input change
   const handleInputChange = (e) => {
+    if (!e || !e.target) return;
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -128,6 +129,7 @@ export const EventEdit = () => {
 
   // Handle image change
   const handleImageChange = (e) => {
+    if (!e || !e.target || !e.target.files) return;
     const file = e.target.files[0];
     if (file) {
       setCoverImg(file);
@@ -136,6 +138,7 @@ export const EventEdit = () => {
 
   // Handle category change
   const handleCategoryChange = (e) => {
+    if (!e || !e.target) return;
     setCategory(e.target.value);
   };
 
@@ -146,27 +149,28 @@ export const EventEdit = () => {
 
     console.log("Ent:", eventId);
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.token) {
-      try {
-        const result = await axios.put(
-          `http://localhost:3001/api/event/edit/${eventId}`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-        setAlertMessage("Event created successfully!");
-        setSnackbarOpen(true);
-        setTimeout(() => {
-          navigate(`/event/${eventId}`);
-        }, 3000);
-      } catch (error) {
-        console.log("Error uploading event:", error);
-      }
-    } else {
-      console.log("User not logged in or invalid access token");
+    if (!user || !user.token) {
+      setAlertMessage("User not logged in or invalid access token");
+      setSnackbarOpen(true);
+      return;
+    }
+    try {
+      const result = await axios.put(
+        `http://localhost:3001/api/event/edit/${eventId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setAlertMessage("Event created successfully!");
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate(`/event/${eventId}`);
+      }, 3000);
+    } catch (error) {
+      console.log("Error uploading event:", error);
     }
   };
 

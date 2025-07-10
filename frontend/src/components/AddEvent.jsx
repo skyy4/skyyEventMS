@@ -75,6 +75,7 @@ export const AddEvent = () => {
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
+    if (!e || !e.target) return;
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -88,6 +89,7 @@ export const AddEvent = () => {
   };
 
   const handleImageChange = (e) => {
+    if (!e || !e.target || !e.target.files) return;
     const file = e.target.files[0];
     if (file) {
       setCoverImg(file);
@@ -95,40 +97,42 @@ export const AddEvent = () => {
   };
 
   const handleCategoryChange = (e) => {
+    if (!e || !e.target) return;
     setCategory(e.target.value);
   };
 
   // Update event Id in user collection
   const updateUser = async (eventData) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.token) {
-      try {
-        const userData = await axios.get(
-          `http://localhost:3001/api/user/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-        const currentEvents = userData.data.created_event || [];
-
-        await axios.put(
-          `http://localhost:3001/api/user/edit/${userId}`,
-          {
-            created_event: [...currentEvents, eventData._id],
+    if (!user || !user.token) {
+      setAlertMessage("User not logged in or invalid access token");
+      setSnackbarOpen(true);
+      return;
+    }
+    try {
+      const userData = await axios.get(
+        `http://localhost:3001/api/user/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-      } catch (err) {
-        console.log("Error: ", err);
-      }
-    } else {
-      console.log("User not logged in or invalid access token");
+        }
+      );
+      const currentEvents = userData.data.created_event || [];
+
+      await axios.put(
+        `http://localhost:3001/api/user/edit/${userId}`,
+        {
+          created_event: [...currentEvents, eventData._id],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+    } catch (err) {
+      console.log("Error: ", err);
     }
   };
   const handleSubmit = async (e) => {
@@ -166,30 +170,31 @@ export const AddEvent = () => {
     formDataToSend.append("created_at", created_at);
     formDataToSend.append("category", category);
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.token) {
-      try {
-        const result = await axios.post(
-          `${apiUrl}/api/event/createEvent`,
-          formDataToSend,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-        setCreatedEvent(result.data);
-        updateUser(result.data);
-        setAlertMessage("Event created successfully!");
-        setSnackbarOpen(true);
-        setTimeout(() => {
-          navigate("/event");
-        }, 3000);
-      } catch (error) {
-        console.log("Error uploading event:", error);
-      }
-    } else {
-      console.log("User not logged in or invalid access token");
+    if (!user || !user.token) {
+      setAlertMessage("User not logged in or invalid access token");
+      setSnackbarOpen(true);
+      return;
+    }
+    try {
+      const result = await axios.post(
+        `${apiUrl}/api/event/createEvent`,
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setCreatedEvent(result.data);
+      updateUser(result.data);
+      setAlertMessage("Event created successfully!");
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate("/event");
+      }, 3000);
+    } catch (error) {
+      console.log("Error uploading event:", error);
     }
   };
 

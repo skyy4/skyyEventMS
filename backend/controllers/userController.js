@@ -32,18 +32,19 @@ const getUser = async (req, res) => {
 };
 
 const signup = async (req, res) => {
-  const { first_name, last_name, role, email, username, password, created_at } =
-    req.body;
+  const { first_name, last_name, role, email, username, password, created_at } = req.body;
   console.log(req.body);
 
   try {
+    // Always use lowercase for email
+    const lowerEmail = email.toLowerCase();
     // Check if the user already exist
-    let user = await userModel.findOne({ email });
+    let user = await userModel.findOne({ email: lowerEmail });
     if (user) {
       return res.status(400).json({ msg: "Email is already exists" });
     }
     // Check if the email is valid
-    if (!validator.isEmail(email)) {
+    if (!validator.isEmail(lowerEmail)) {
       throw Error("Email is not valid");
     }
 
@@ -53,7 +54,7 @@ const signup = async (req, res) => {
     user = new userModel({
       first_name,
       last_name,
-      email,
+      email: lowerEmail,
       role,
       username,
       password: encryptPassword,
@@ -75,27 +76,27 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    // Check if email or password is empty
     if (!email || !password) {
       return res.status(400).send("All fields must be filled");
     }
-
+    // Always use lowercase for email
+    const lowerEmail = email.toLowerCase();
     // Find the user by email
-    const user = await userModel.findOne({ email });
-
+    const user = await userModel.findOne({ email: lowerEmail });
     if (!user) {
+      console.log("User not found for email:", lowerEmail);
       return res.status(401).send("Invalid email or password");
     }
-
+    console.log("User found:", user.email, "Hash:", user.password);
     const match = await bcrypt.compare(password, user.password);
-
     if (!match) {
+      console.log("Password mismatch for user:", lowerEmail);
       return res.status(401).send("Invalid email or password");
     }
-
     const token = createToken(user._id, user.role);
     return res.status(200).json({ message: "Login successfully", token });
-  } catch {
+  } catch (err) {
+    console.error("Login error:", err);
     return res.status(500).send("Server error");
   }
 };
