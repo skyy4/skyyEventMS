@@ -409,6 +409,34 @@ export const AddEvent = () => {
                     <MenuItem value={"event"}>Event</MenuItem>
                   </Select>
                 </FormControl>
+                {/* Image Upload Section */}
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                  <label htmlFor="cover-image-upload">
+                    <Input
+                      accept="image/*"
+                      id="cover-image-upload"
+                      type="file"
+                      onChange={handleImageChange}
+                    />
+                    <Button
+                      variant="outlined"
+                      component="span"
+                      startIcon={<AddPhotoAlternate />}
+                      sx={{ mb: 1 }}
+                    >
+                      Upload Cover Image
+                    </Button>
+                  </label>
+                  {coverImg && (
+                    <Box sx={{ mt: 1, mb: 1 }}>
+                      <img
+                        src={URL.createObjectURL(coverImg)}
+                        alt="Cover Preview"
+                        style={{ maxWidth: '100%', maxHeight: 180, borderRadius: 8, boxShadow: '0 2px 8px rgba(80,80,80,0.12)' }}
+                      />
+                    </Box>
+                  )}
+                </Box>
                 <motion.div
                   whileHover={{ scale: 1.04, boxShadow: '0 6px 24px 0 rgba(103, 58, 183, 0.18)' }}
                   transition={{ type: 'spring', stiffness: 300 }}
