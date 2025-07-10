@@ -38,6 +38,8 @@ import Michelinlogo from "../asset/Icon/Systemlogo2.jpg";
 import Federallogo from "../asset/Icon/rotaract.jpg";
 import { motion, AnimatePresence } from 'framer-motion';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Input = styled("input")({
   display: "none",
 });
