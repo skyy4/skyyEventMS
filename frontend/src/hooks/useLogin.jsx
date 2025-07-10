@@ -30,7 +30,7 @@ export const useLogin = () => {
       dispatch({ type: "LOGIN", payload: json });
 
       // Redirect to the home page if login success
-      navigate("/", { replace: true });
+      window.location.href = "/";
 
       setIsLoading(false);
     } catch (error) {

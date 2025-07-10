@@ -27,6 +27,9 @@ export const useSignup = () => {
       // Update the auth context
       dispatch({ type: "LOGIN", payload: json });
 
+      // Force full reload to ensure new user context
+      window.location.href = "/";
+
       setIsLoading(false);
       return res.data;
     } catch (error) {
