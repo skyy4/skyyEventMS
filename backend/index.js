@@ -22,26 +22,49 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "http://127.0.0.1:3000"
+  "http://127.0.0.1:3000",
+  "https://skyy-event-ms.vercel.app"
 ];
 
-// Middleware
-app.use(cors({
+// Temporary CORS debug middleware - REMOVE BEFORE PRODUCTION
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  if (req.method === "OPTIONS") {
+    console.log('CORS DEBUG: Preflight request allowed for all origins');
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+// CORS configuration
+const corsOptions = {
   origin: function(origin, callback){
-    if(!origin) return callback(null, true);
+    console.log('CORS request from origin:', origin); // Log the origin
+    if(!origin) {
+      console.log('CORS: No origin, allowing request');
+      return callback(null, true);
+    }
     if(allowedOrigins.indexOf(origin) === -1){
-      var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      var msg = 'The CORS policy for this site does not allow access from the specified Origin: ' + origin;
+      console.error('CORS: Blocked origin:', origin, '| Error:', msg);
       return callback(new Error(msg), false);
     }
+    console.log('CORS: Allowed origin:', origin);
     return callback(null, true);
   },
-  credentials: true
-}));
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  optionsSuccessStatus: 200
+};
 
-app.options('*', cors({
-  origin: allowedOrigins,
-  credentials: true
-}));
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 app.use(express.json()); // To parse JSON bodies
 app.use(bodyParser.json());
@@ -69,5 +92,3 @@ const HOST = '0.0.0.0';
 app.listen(PORT, HOST, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);
 });
-// trigger redeploy
-// trigger redeploy
