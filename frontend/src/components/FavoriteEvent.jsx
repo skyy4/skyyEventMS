@@ -47,8 +47,9 @@ export default function FavoriteEvent() {
     if (userId) {
       const fetchUser = async () => {
         try {
+          const apiUrl = import.meta.env.VITE_API_URL;
           const response = await axios.get(
-            `http://localhost:3001/api/getUserById/${userId}`
+            `${apiUrl}/api/getUserById/${userId}`
           );
           let userData = response.data;
           setUser(userData);
@@ -69,11 +70,12 @@ export default function FavoriteEvent() {
     ) {
       const fetchEvents = async () => {
         try {
+          const apiUrl = import.meta.env.VITE_API_URL;
           const fetchedEvents = await Promise.all(
             user.favourite_events.map(async (id) => {
               // Make a separate GET request for each ID
               const response = await axios.get(
-                `http://localhost:3001/api/event/getEvent/${id}`
+                `${apiUrl}/api/event/getEvent/${id}`
               );
               let eventData = response.data;
 

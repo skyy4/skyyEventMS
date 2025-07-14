@@ -30,6 +30,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   const user_id = JSON.parse(localStorage.getItem("user"));
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (user && user.registered_events) {
@@ -71,7 +72,7 @@ export default function Dashboard() {
       const fetchUser = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/api/getUserById/${userId}`
+            `${apiUrl}/api/getUserById/${userId}`
           );
           let userData = response.data;
           setUser(userData);
