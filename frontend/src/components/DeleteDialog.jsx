@@ -13,6 +13,8 @@ import { jwtDecode } from "jwt-decode";
 import { useLogout } from "../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const { logout } = useLogout();
@@ -35,7 +37,7 @@ export default function FormDialog() {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token) {
       try {
-        await axios.delete(`http://localhost:3001/api/user/delete/${userId}`, {
+        await axios.delete(`${apiUrl}/api/user/delete/${userId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
