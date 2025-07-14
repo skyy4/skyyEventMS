@@ -8,38 +8,44 @@ import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import eventImg from '../asset/Event/5.jpg';
+import sportsImg from '../asset/Event/4.jpg';
+import partiesImg from '../asset/Event/6.jpg';
+import communitiesImg from '../asset/Event/7.jpg';
+import theatersImg from '../asset/Event/8.jpg';
+import concertsImg from '../asset/Event/9.jpg';
 
 const images = [
   {
-    url: '/src/asset/Event/5.jpg',
+    url: eventImg,
     title: 'EVENTS',
     category: 'event',
   },
   {
-    url: '/src/asset/Event/4.jpg',
+    url: sportsImg,
     title: 'SPORTS',
     category: 'sports',
-},
+  },
   {
-    url: '/src/asset/Event/6.jpg',
+    url: partiesImg,
     title: 'PARTIES',
     category: 'parties',
-},
+  },
   {
-    url: '/src/asset/Event/7.jpg',
+    url: communitiesImg,
     title: 'COMMUNITIES',
     category: 'communities',
-},
+  },
   {
-    url: '/src/asset/Event/8.jpg',
+    url: theatersImg,
     title: 'THEATERS',
     category: 'theaters',
-},
+  },
   {
-    url: '/src/asset/Event/9.jpg',
+    url: concertsImg,
     title: 'CONCERTS',
     category: 'concerts',
-},
+  },
 ];
 
 const GradientOverlay = styled('div')(() => ({

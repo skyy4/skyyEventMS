@@ -75,8 +75,9 @@ export const EventEdit = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
+        const apiUrl = import.meta.env.VITE_API_URL;
         const response = await axios.get(
-          `http://localhost:3001/api/event/getEvent/${eventId}`
+          `${apiUrl}/api/event/getEvent/${eventId}`
         );
 
         let eventData = response.data;
@@ -155,8 +156,9 @@ export const EventEdit = () => {
       return;
     }
     try {
+      const apiUrl = import.meta.env.VITE_API_URL;
       const result = await axios.put(
-        `http://localhost:3001/api/event/edit/${eventId}`,
+        `${apiUrl}/api/event/edit/${eventId}`,
         formData,
         {
           headers: {
