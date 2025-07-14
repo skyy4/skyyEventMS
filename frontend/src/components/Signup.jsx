@@ -78,7 +78,6 @@ export const Signup = () => {
     if (password !== confirmPassword) {
       return;
     }
-    const created_at = new Date().toISOString();
     const userData = {
       first_name: firstName,
       last_name: lastName,
@@ -86,7 +85,6 @@ export const Signup = () => {
       username,
       password,
       role: "user",
-      created_at,
     };
     const res = await signup(userData);
     if (res) {

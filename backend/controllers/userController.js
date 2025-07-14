@@ -32,7 +32,7 @@ const getUser = async (req, res) => {
 };
 
 const signup = async (req, res) => {
-  const { first_name, last_name, role, email, username, password, created_at } = req.body;
+  const { first_name, last_name, role, email, username, password } = req.body;
   console.log(req.body);
 
   try {
@@ -57,8 +57,7 @@ const signup = async (req, res) => {
       email: lowerEmail,
       role,
       username,
-      password: encryptPassword,
-      created_at,
+      password: encryptPassword
     });
     // signup user
     const signUser = await user.save();
