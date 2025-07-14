@@ -51,6 +51,7 @@ export const Signup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
+  const [setError] = useState(null); // Add this line if setError is used in this component
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword ? true : false);
