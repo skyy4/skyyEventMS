@@ -32,6 +32,7 @@ export default function FavoriteEvent() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_API_URL;
  
   const user_id = JSON.parse(localStorage.getItem("user"));
 
