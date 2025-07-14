@@ -52,7 +52,9 @@ export default function FavoriteEvent() {
     if (userId) {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/api/getUserById/${userId}`);
+                const userObj = JSON.parse(localStorage.getItem("user"));
+                const token = userObj?.token;
+                const response = await axios.get(`${apiUrl}/api/user/${userId}`, token ? { headers: { Authorization: `Bearer ${token}` } } : {});
                 let userData = response.data;
                 setUser(userData);    
             } catch (error) {
