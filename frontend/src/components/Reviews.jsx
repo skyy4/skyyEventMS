@@ -93,7 +93,7 @@ export const Reviews = () => {
   // Get reviews from DB
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.token) {
+    if (user && user.token && eventId) {
       axios
         .get(`${apiUrl}/api/review/getReview/${eventId}`, {
           headers: {
@@ -104,9 +104,9 @@ export const Reviews = () => {
           setReviews(res.data);
         });
     } else {
-      console.log("User not logged in or invalid access token");
+      console.log("User not logged in or invalid access token or eventId missing");
     }
-  }, []);
+  }, [eventId]);
 
   // Get userName and eventTitle
   useEffect(() => {
