@@ -111,7 +111,7 @@ export const AddEvent = () => {
     }
     try {
       const userData = await axios.get(
-        `http://localhost:3001/api/user/${userId}`,
+        `${apiUrl}/api/user/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -121,7 +121,7 @@ export const AddEvent = () => {
       const currentEvents = userData.data.created_event || [];
 
       await axios.put(
-        `http://localhost:3001/api/user/edit/${userId}`,
+        `${apiUrl}/api/user/edit/${userId}`,
         {
           created_event: [...currentEvents, eventData._id],
         },

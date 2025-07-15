@@ -59,10 +59,11 @@ export default function MediaCard() {
   };
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+    const apiUrl = import.meta.env.VITE_API_URL;
     if (user && user.token) {
       // Fetch events
       axios
-        .get("http://localhost:3001/api/event/getEvent")
+        .get(`${apiUrl}/api/event/getEvent`)
         .then((res) => {
           const eventsData = res.data;
 

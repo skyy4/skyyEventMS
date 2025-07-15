@@ -40,8 +40,9 @@ export const Feedback = () => {
   // Fetch feedback
   const fetchFeedback = async () => {
     try {
+      const apiUrl = import.meta.env.VITE_API_URL;
       const res = await axios.get(
-        `http://localhost:3001/api/contact/getContacts/`
+        `${apiUrl}/api/contact/getContacts/`
       );
       setFeedback(res.data);
     } catch (err) {
@@ -64,8 +65,9 @@ export const Feedback = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token) {
       try {
+        const apiUrl = import.meta.env.VITE_API_URL;
         await axios.delete(
-          `http://localhost:3001/api/contact/deleteContact/${feedbackToDelete}`,
+          `${apiUrl}/api/contact/deleteContact/${feedbackToDelete}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -94,8 +96,9 @@ export const Feedback = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token) {
       try {
+        const apiUrl = import.meta.env.VITE_API_URL;
         await axios.put(
-          `http://localhost:3001/api/contact/updateContact/${id}`,
+          `${apiUrl}/api/contact/updateContact/${id}`,
           { processed: !currentStatus },
           {
             headers: {

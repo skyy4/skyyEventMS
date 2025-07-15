@@ -80,10 +80,11 @@ export const AdminDashboard = () => {
     setLoading(true); // Start overall loading
     setEventsLoading(true); // Start loading for events
     const user = JSON.parse(localStorage.getItem("user"));
+    const apiUrl = import.meta.env.VITE_API_URL;
     if (user && user.token) {
       // Fetch events
       axios
-        .get("http://localhost:3001/api/event/getEvent", {
+        .get(`${apiUrl}/api/event/getEvent`, {
           headers: { Authorization: `Bearer ${user.token}` },
         })
         .then((res) => {
@@ -123,7 +124,7 @@ export const AdminDashboard = () => {
 
       // Fetch users
       axios
-        .get("http://localhost:3001/api/user", {
+        .get(`${apiUrl}/api/user`, {
           headers: { Authorization: `Bearer ${user.token}` },
         })
         .then((res) => {
@@ -148,13 +149,14 @@ export const AdminDashboard = () => {
 
   const handleConfirmDelete = () => {
     const user = JSON.parse(localStorage.getItem("user"));
+    const apiUrl = import.meta.env.VITE_API_URL;
     if (user && user.token) {
       setDeleting(true); // Start deleting
       const token = user.token;
       const endpoint =
         deleteType === "event"
-          ? `http://localhost:3001/api/event/delete/${selectedItemId}`
-          : `http://localhost:3001/api/user/delete/${selectedItemId}`;
+          ? `${apiUrl}/api/event/delete/${selectedItemId}`
+          : `${apiUrl}/api/user/delete/${selectedItemId}`;
 
       axios
         .delete(endpoint, {

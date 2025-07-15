@@ -103,9 +103,10 @@ export const NavBar = ({ logout, userId, userRole, token }) => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+    const apiUrl = import.meta.env.VITE_API_URL;
     if (user && user.token) {
       axios
-        .get(`http://localhost:3001/api/user/${userId}`, {
+        .get(`${apiUrl}/api/user/${userId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

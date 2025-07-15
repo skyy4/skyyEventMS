@@ -34,8 +34,9 @@ export const ReviewPannel = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token) {
+      const apiUrl = import.meta.env.VITE_API_URL;
       axios
-        .get(`http://localhost:3001/api/review/`, {
+        .get(`${apiUrl}/api/review/`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -59,8 +60,9 @@ export const ReviewPannel = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token) {
       try {
+        const apiUrl = import.meta.env.VITE_API_URL;
         await axios.delete(
-          `http://localhost:3001/api/review/deleteReview/${reviewToDelete}`,
+          `${apiUrl}/api/review/deleteReview/${reviewToDelete}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,

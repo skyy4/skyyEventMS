@@ -39,8 +39,9 @@ export default function FormDialogDelete({ size = "medium" }) {
     if (userId) {
       const fetchUser = async () => {
         try {
+          const apiUrl = import.meta.env.VITE_API_URL;
           const response = await axios.get(
-            `http://localhost:3001/api/getUserById/${userId}`
+            `${apiUrl}/api/getUserById/${userId}`
           );
           let userData = response.data;
           setUser(userData);
@@ -76,8 +77,9 @@ export default function FormDialogDelete({ size = "medium" }) {
 
         try {
           //remove the event from all users
+          const apiUrl = import.meta.env.VITE_API_URL;
           const response = await axios.post(
-            `http://localhost:3001/api/user/remove-event/${eventId}`,
+            `${apiUrl}/api/user/remove-event/${eventId}`,
             {}, 
             {
               headers: {

@@ -69,8 +69,9 @@ const ImageUpload = ({ onImageChange }) => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token) {
       try {
+        const apiUrl = import.meta.env.VITE_API_URL;
         const response = await axios.put(
-          `http://localhost:3001/api/updatedUserImage/${userId}`,
+          `${apiUrl}/api/updatedUserImage/${userId}`,
           formDataToSend,
           {
             headers: {

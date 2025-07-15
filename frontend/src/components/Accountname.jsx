@@ -45,8 +45,9 @@ function Accountname() {
     const fetchUser = async () => {
       if (!userId) return; // Ensure userId is set before making the request
       try {
+        const apiUrl = import.meta.env.VITE_API_URL;
         const response = await axios.get(
-          `http://localhost:3001/api/getUserById/${userId}`
+          `${apiUrl}/api/getUserById/${userId}`
         );
 
         let userData = response.data;
