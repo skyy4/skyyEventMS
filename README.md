@@ -1,24 +1,20 @@
 # Eventify
 
-Effortless Event Management for Universities
+<p align="center">
+  <a href="https://skyy-event-ms.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit-green?style=for-the-badge&logo=vercel" alt="Live Demo"/>
+  </a>
+</p>
 
-Eventify is your go-to tool for planning and managing university events. From campus activities to student gatherings, our app makes it easy to organize, track, and execute events smoothly. With Eventify, you can handle everything in one place and ensure your events are a success.
-
----
-
-## Table of Contents
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [API Endpoints](#api-endpoints)
-- [Screenshots](#screenshots)
-- [Developer](#developer)
-- [License](#license)
+<p align="center">
+  <b>Effortless Event Management for Universities</b><br/>
+  <i>Plan, manage, and celebrate campus events with style.</i>
+</p>
 
 ---
 
-## Features
+## 🚀 Features
+
 - User authentication (signup, login, JWT-based sessions)
 - Create, edit, and delete events (with image upload)
 - Browse and search events by category
@@ -31,15 +27,17 @@ Eventify is your go-to tool for planning and managing university events. From ca
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
+
 - **Frontend:** React, Material-UI, Framer Motion, Axios, React Router, Vite
 - **Backend:** Node.js, Express.js, MongoDB, Mongoose, JWT, Multer
 - **Other:** EmailJS, Bootstrap, Notistack
 
 ---
 
-## Project Structure
-```
+## 📁 Project Structure
+
+```text
 Eventer-main/
   backend/           # Node.js/Express API
     config/          # DB config
@@ -62,7 +60,7 @@ Eventer-main/
 
 ---
 
-## Getting Started
+## 🧑‍💻 Getting Started
 
 ### Prerequisites
 - Node.js (v16+ recommended)
@@ -86,7 +84,7 @@ Eventer-main/
 
 ---
 
-## API Endpoints (Sample)
+## 📡 API Endpoints (Sample)
 
 ### Event Routes
 - `GET    /api/event/getEvent`         - List all events
@@ -113,7 +111,7 @@ Eventer-main/
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
 | Home Page | Event Details | Admin Dashboard |
 |---|---|---|
@@ -121,14 +119,16 @@ Eventer-main/
 
 > _Below are some key screens of Eventify. Replace the image paths with your actual screenshots for best results._
 
-## Developer
+---
+
+## 👤 Developer
 **Shashi Kumar Yadav**  
-Lucknow/Mumbai
+Lucknow/Mumbai  
 Email: sky593499@gmail.com  
 
 > Passionate about building beautiful web experiences. Loves React, Node.js, and all things tech. Always learning, always curious.
 
 ---
 
-## License
+## 📝 License
 This project is licensed under the MIT License.
