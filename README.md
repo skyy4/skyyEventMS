@@ -114,12 +114,12 @@ Eventer-main/
 ---
 
 ## Screenshots
-> Ad## Screenshots
-![Home Page](./frontend/public/Screenshot%202025-07-16%20at%209.45.06 AM.png)
----
-![Dashboard](./frontend/public/Screenshot%202025-07-16%20at%209.45.17 AM.png)
----
-![Event Details](./frontend/public/Screenshot%202025-07-16%20at%209.45.54 AM.png)
+
+| Home Page | Event Details | Admin Dashboard |
+|---|---|---|
+| ![Home Page](./screenshots/homepage.png) | ![Event Details](./screenshots/event-details.png) | ![Admin Dashboard](./screenshots/admin-dashboard.png) |
+
+> _Below are some key screens of Eventify. Replace the image paths with your actual screenshots for best results._
 
 ## Developer
 **Shashi Kumar Yadav**  
