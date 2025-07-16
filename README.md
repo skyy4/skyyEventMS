@@ -114,13 +114,16 @@ Eventer-main/
 ---
 
 ## Screenshots
-> Add screenshots of the UI here (Home, Event List, Event Details, Admin Dashboard, etc.)
-
+> Ad## Screenshots
+![Home Page](./frontend/public/Screenshot%202025-07-16%20at%209.45.06 AM.png)
 ---
+![Dashboard](./frontend/public/Screenshot%202025-07-16%20at%209.45.17 AM.png)
+---
+![Event Details](./frontend/public/Screenshot%202025-07-16%20at%209.45.54 AM.png)
 
 ## Developer
 **Shashi Kumar Yadav**  
-Lucknow, UP, India  
+Lucknow/Mumbai
 Email: sky593499@gmail.com  
 
 > Passionate about building beautiful web experiences. Loves React, Node.js, and all things tech. Always learning, always curious.
