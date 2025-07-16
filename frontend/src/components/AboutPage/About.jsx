@@ -54,7 +54,7 @@ export const About = () => {
               />
             </Grid>
             <Grid item xs={12} md={7}>
-              <Typography variant="h4" fontWeight={700} color="primary" gutterBottom>Introduction</Typography>
+              <Typography variant="h4" fontWeight={700} color="primary" gutterBottom>Eventify</Typography>
               <Typography variant="body1" color="text.primary">
                 Eventify is your go-to tool for planning and managing university events. From campus activities to student gatherings, our app makes it easy to organize, track, and execute events smoothly. With Eventify, you can handle everything in one place and ensure your events are a success.
               </Typography>
