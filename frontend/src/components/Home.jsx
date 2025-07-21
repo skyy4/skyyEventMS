@@ -16,6 +16,7 @@ import shutterp from '../asset/poster/shutterp.jpg';
 import kavyap from '../asset/poster/kavyap.jpg';
 import dancep from '../asset/poster/dancep.jpg';
 import photoboothp from '../asset/poster/photoboothp.jpg';
+import eventIcon from '../asset/event.png';
 
 
 export const Home = ({ token }) => {
@@ -127,29 +128,20 @@ export const Home = ({ token }) => {
           }}
         >
           {/* Single, large, simple animated paper plane */}
-          <motion.svg width="220" height="120" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginBottom: 24 }}>
-            <motion.path
-              d="M20 80 Q 110 10, 200 80"
-              stroke="#512da8"
-              strokeDasharray="10 10"
-              strokeWidth="2.5"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.5 }}
-            />
-            {/* Large plane */}
-            <motion.polygon
-              points="20,80 40,90 20,100 28,90"
-              fill="#fff"
-              stroke="#512da8"
-              strokeWidth="2.5"
-              initial={{ x: 0, y: 0 }}
-              animate={{ x: [0, 160], y: [0, -18, 0, 18, 0] }}
-              transition={{ duration: 6, repeat: Infinity, repeatType: 'loop', ease: 'easeInOut' }}
-              style={{ filter: 'drop-shadow(0 2px 8px #b39ddb88)' }}
-            />
-          </motion.svg>
+          {/* Removed animated SVG. Replaced with static event icon. */}
+          <img 
+            src={eventIcon}
+            alt="Event Icon"
+            style={{
+              width: 90,
+              height: 90,
+              marginBottom: 24,
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              filter: 'drop-shadow(0 2px 8px #b39ddb88)'
+            }}
+          />
           <motion.h1
             style={{
               fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
